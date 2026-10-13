@@ -1,0 +1,22 @@
+# Original dataset — keep local
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Temporary and backup files
+*.tmp
+*.bak
+~$*.xlsx
+Data/
+# Excel working files — keep local for now
+Excel/.DS_Store
