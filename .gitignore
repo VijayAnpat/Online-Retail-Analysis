@@ -20,3 +20,4 @@ venv/
 Data/
 # Excel working files — keep local for now
 Excel/.DS_Store
+Excel/*.xlsx
