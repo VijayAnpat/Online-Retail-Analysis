@@ -67,6 +67,7 @@ The SQL phase uses MySQL to investigate data quality and answer sales and busine
 4. `Sql/product_analysis.sql` — Product performance, customer reach, and repeat purchasing.
 5. `Sql/time_and_seasonal_analysis.sql` — Monthly and quarterly sales trends and month-over-month changes.
 6. `Sql/advanced_business_analysis.sql` — Customer revenue concentration, customer segmentation, declining product sales, inactive customers, new versus returning customer revenue, country-level customer analysis, and frequently purchased product combinations.
+- [SQL Business Insights](Sql/Sql_Business_Insights.md) — Summary of business findings, customer analysis, product trends, and recommendations.
 
 ### Selected Findings
 
