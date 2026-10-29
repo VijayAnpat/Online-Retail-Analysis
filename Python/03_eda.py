@@ -1,3 +1,8 @@
+# Online Retail Analysis
+# Script: Exploratory Data Analysis (EDA)
+# Purpose:
+# Analyze revenue trends, countries, products, customers,
+# invoice activity, and cancellations using Python.
 
 import pandas as pd
 import numpy as np
@@ -517,3 +522,107 @@ print("Unique cancellation invoices:",
 
 print("Total cancellation revenue:",
       round(cancellations["Revenue"].sum(), 2))
+
+# Final Review 1: Revenue Reconciliation
+
+print("\n===== REVENUE RECONCILIATION =====")
+
+print("Total revenue, all records:",
+      round(df["Revenue"].sum(), 2))
+
+print("Revenue from cancellation records:",
+      round(cancellations["Revenue"].sum(), 2))
+
+print("Revenue excluding cancellation records:",
+      round(df.loc[~df["InvoiceNo"].astype(str).str.startswith("C"),
+                   "Revenue"].sum(), 2))
+
+# Final Review 2: Inspect Special Adjustment Records
+
+adjustments = df[
+    df["Description"].astype(str).str.contains(
+        "Adjust bad debt", case=False, na=False
+    )
+]
+
+print("\n===== SPECIAL ADJUSTMENT RECORDS =====")
+
+print(
+    adjustments[
+        [
+            "InvoiceNo",
+            "StockCode",
+            "Description",
+            "Quantity",
+            "UnitPrice",
+            "Revenue",
+            "Country"
+        ]
+    ].to_string(index=False)
+)
+
+print("\nNumber of adjustment records:", len(adjustments))
+print("Total adjustment revenue:", round(adjustments["Revenue"].sum(), 2))
+
+# Final Review 3: Revenue Excluding Cancellations and Bad-Debt Adjustments
+
+is_cancellation = df["InvoiceNo"].astype(str).str.startswith("C")
+
+is_bad_debt_adjustment = (
+    df["Description"].astype(str)
+    .str.contains("Adjust bad debt", case=False, na=False)
+)
+
+ordinary_records = df[
+    ~is_cancellation & ~is_bad_debt_adjustment
+]
+
+print("\n===== ORDINARY RECORDS REVENUE CHECK =====")
+print("Ordinary records:", len(ordinary_records))
+print("Ordinary records revenue:",
+      round(ordinary_records["Revenue"].sum(), 2))
+
+print("Excluded cancellation revenue:",
+      round(df.loc[is_cancellation, "Revenue"].sum(), 2))
+
+print("Excluded bad-debt adjustment revenue:",
+      round(df.loc[is_bad_debt_adjustment, "Revenue"].sum(), 2))
+
+# Final Review 4: Zero-Price and Missing-Description Records
+
+zero_price = df["UnitPrice"].eq(0)
+missing_description = df["Description"].isna()
+
+print("\n===== ZERO-PRICE AND MISSING-DESCRIPTION CHECK =====")
+
+print("Zero-price records:", int(zero_price.sum()))
+print("Missing descriptions:", int(missing_description.sum()))
+
+print("Records with both conditions:",
+      int((zero_price & missing_description).sum()))
+
+print("Zero-price records with descriptions:",
+      int((zero_price & ~missing_description).sum()))
+
+print("Missing descriptions with non-zero price:",
+      int((missing_description & ~zero_price).sum()))
+
+# Final Review 5: Unusual Negative-Quantity Records
+
+is_cancellation = df["InvoiceNo"].astype(str).str.startswith("C")
+
+unusual_negative_quantity = df[
+    (df["Quantity"] < 0) & (~is_cancellation)
+]
+
+print("\n===== UNUSUAL NEGATIVE-QUANTITY RECORDS =====")
+
+print("Record count:", len(unusual_negative_quantity))
+print("Zero-price records:",
+      int(unusual_negative_quantity["UnitPrice"].eq(0).sum()))
+print("Missing descriptions:",
+      int(unusual_negative_quantity["Description"].isna().sum()))
+print("Total quantity:",
+      int(unusual_negative_quantity["Quantity"].sum()))
+print("Total revenue:",
+      round(unusual_negative_quantity["Revenue"].sum(), 2))

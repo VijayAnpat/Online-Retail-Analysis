@@ -1,4 +1,8 @@
-#Load the dataset for cleaning
+# Online Retail Analysis
+# Script: Data Cleaning
+# Purpose:
+# Remove exact duplicate rows, convert data types,
+# validate data quality, and save the cleaned dataset.
 
 import pandas as pd
 

@@ -1,4 +1,8 @@
-#Loading the online retail dataset
+# Online Retail Analysis
+# Script: Data Understanding
+# Purpose:
+# Inspect the original dataset's structure, columns,
+# data types, missing values, and duplicate records.
 
 import pandas as pd
 
