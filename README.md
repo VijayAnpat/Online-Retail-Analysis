@@ -2,15 +2,15 @@
 
 ## Project Overview
 
-This portfolio project analyzes transactions from a UK-based online retailer to understand sales performance, customer purchasing behavior, product trends, and business performance.
+This portfolio project analyzes transactions from a UK-based online retailer to understand sales performance, customer purchasing behavior, product trends, and overall business performance.
 
-The project uses Excel and SQL to investigate data quality, analyze transactions, identify purchasing patterns, and answer business questions using structured data analysis.
+The project uses Microsoft Excel, SQL, and Python to investigate data quality, analyze transactions, identify purchasing patterns, and answer business questions using structured data analysis.
 
 ## Objectives
 
 - Investigate data quality issues and transaction anomalies.
 - Analyze sales performance across months, quarters, countries, and products.
-- Understand customer purchasing behavior, retention, and revenue concentration.
+- Understand customer purchasing behavior, repeat purchasing, and revenue concentration.
 - Identify high-performing products and frequently purchased product combinations.
 - Examine customer value segments and periods of declining product sales.
 - Evaluate cancellations, missing customer information, and unusual transactions.
@@ -20,15 +20,15 @@ The project uses Excel and SQL to investigate data quality, analyze transactions
 
 - **Microsoft Excel** — Data quality investigation, PivotTables, charts, KPI cards, and dashboard development.
 - **SQL / MySQL** — Data quality checks, sales analysis, customer and product analysis, time-series analysis, and advanced business queries.
-- **Python** — Planned data analysis using Pandas, NumPy, Matplotlib, and Seaborn.
-- **Power BI** — Planned project reporting and interactive visualization deliverables.
+- **Python** — Data cleaning, exploratory data analysis, sales analysis, customer analysis, and product analysis using Pandas, NumPy, Matplotlib, and Seaborn.
+- **Power BI** — Final interactive reporting and dashboard development (planned).
 
 ## Project Structure
 
-- `Data/` — Original dataset, stored locally and excluded from Git.
+- `Data/` — Original and processed datasets, stored locally and excluded from Git.
 - `Excel/` — Excel analysis, documentation, and dashboard deliverables.
 - `Sql/` — SQL scripts for data quality, sales, customer, product, time and seasonal, and advanced business analysis.
-- `Python/` — Python-based analysis deliverables.
+- `Python/` — Python scripts for data understanding, cleaning, EDA, sales, customer, and product analysis.
 - `PowerBI/` — Power BI reports and dashboard deliverables.
 
 ## Dataset
@@ -37,13 +37,18 @@ The project uses Excel and SQL to investigate data quality, analyze transactions
 
 [View the dataset](https://archive.ics.uci.edu/dataset/352/online+retail)
 
-The dataset contains transactions from a UK-based online retailer between December 2010 and December 2011. It includes invoice numbers, product codes and descriptions, quantities, invoice dates, unit prices, customer IDs, and countries.
+The dataset contains transactions from a UK-based online retailer between December 2010 and December 2011.
+
+It includes invoice numbers, product codes and descriptions, quantities, invoice dates, unit prices, customer IDs, and countries.
+
+The original dataset contains 541,909 records and 8 columns.
 
 ## Excel Analysis — Completed
 
 The Excel phase includes data quality investigation, exploratory analysis, PivotTables, visualizations, KPI cards, and a consolidated dashboard.
 
 Key analysis areas include:
+
 - Missing customer IDs and product descriptions.
 - Duplicate transaction records.
 - Cancelled invoices and negative quantities.
@@ -67,9 +72,10 @@ The SQL phase uses MySQL to investigate data quality and answer sales and busine
 4. `Sql/product_analysis.sql` — Product performance, customer reach, and repeat purchasing.
 5. `Sql/time_and_seasonal_analysis.sql` — Monthly and quarterly sales trends and month-over-month changes.
 6. `Sql/advanced_business_analysis.sql` — Customer revenue concentration, customer segmentation, declining product sales, inactive customers, new versus returning customer revenue, country-level customer analysis, and frequently purchased product combinations.
+
 - [SQL Business Insights](Sql/Sql_Business_Insights.md) — Summary of business findings, customer analysis, product trends, and recommendations.
 
-### Selected Findings
+### Selected SQL Findings
 
 - **Customer revenue concentration:** The top 10% of identified customers accounted for approximately 61.38% of customer revenue in the analyzed data.
 - **Repeat purchasing:** Approximately 65.57% of identified customers with eligible non-cancelled purchases made purchases across multiple invoices.
@@ -77,22 +83,46 @@ The SQL phase uses MySQL to investigate data quality and answer sales and busine
 - **Product combinations:** The combination of the pink and red retrospot jumbo bags appeared together in 825 invoices.
 - **Customer inactivity:** 1,449 of 4,339 identified customers had no eligible purchase in the final 90 days of the dataset period.
 
-These findings describe the analyzed historical dataset and should not be interpreted as current business performance.
+## Python Analysis — Completed
+
+The Python phase uses Pandas and NumPy for data preparation and analysis, with Matplotlib and Seaborn for visualization.
+
+### Python Scripts
+
+1. `Python/01_data_understanding.py` — Dataset structure, dimensions, data types, and initial inspection.
+2. `Python/02_data_cleaning.py` — Duplicate removal, date conversion, and preparation of the cleaned dataset.
+3. `Python/03_eda.py` — Exploratory data analysis, distributions, missing values, and initial business patterns.
+4. `Python/04_sales_analysis.py` — Revenue trends, monthly sales performance, invoice counts, and average revenue per invoice.
+5. `Python/05_customer_analysis.py` — Top customers, repeat purchasing, purchase frequency, recency, and RFM segmentation.
+6. `Python/06_product_analysis.py` — Top products by revenue, quantity sold, purchase frequency, and revenue contribution.
+
+### Selected Python Findings
+
+- **Total sales revenue:** 10,631,048.74 after excluding cancellation invoices and bad-debt adjustments.
+- **Monthly sales performance:** November 2011 recorded the highest monthly revenue in the observed period.
+- **Customer behaviour:** 2,845 out of 4,339 identified customers were repeat customers, representing a repeat purchase rate of approximately 65.57%.
+- **Customer revenue concentration:** The top 10 customers contributed approximately 17.31% of identified-customer revenue.
+- **Customer segmentation:** RFM analysis identified Champions, Loyal Customers, Big Spenders, At Risk, Hibernating, Potential Loyalists, and Others.
+- **Product performance:** Regency Cake Stand 3 Tier was among the highest-revenue physical products, while Paper Craft Little Birdie recorded unusually high quantity sales in a single invoice.
 
 ## Data Handling and Limitations
 
-- Cancellation invoice rows are excluded in many sales analyses; this does not fully reconcile each cancellation with its original transaction.
-- Some negative quantities may represent stock corrections or other operational adjustments.
+- Exact duplicate records were removed during data cleaning.
+- Cancellation invoices, identified by invoice numbers beginning with `C`, were excluded from ordinary sales analyses.
+- Bad-debt adjustment records were excluded from ordinary sales and product performance analyses.
+- Postage and other transaction line items were retained in overall transaction revenue where appropriate, but should be excluded when analyzing physical merchandise performance.
+- Some negative quantities may represent stock corrections or other operational adjustments and were not automatically removed from the cleaned master dataset.
 - Customer-level analysis is limited to transactions with an identified `CustomerID`.
 - The dataset ends on December 9, 2011, so December 2011 is incomplete.
 - Quarterly comparisons involving the fourth quarter of 2010 require caution because the dataset contains only December for that quarter.
+- RFM segments are based on selected scoring thresholds and describe purchasing behavior within the observed dataset period. They do not independently prove customer churn.
 - Results may differ depending on transaction filters and the treatment of cancellations, adjustments, and missing customer IDs.
 
 ## Project Status
 
 - **Excel:** Completed.
-- **SQL:** Completed — six analysis scripts committed to the repository.
-- **Python:** Project deliverables to be finalized.
-- **Power BI:** Project deliverables to be finalized.
+- **SQL:** Completed — six analysis scripts.
+- **Python:** Completed — six analysis scripts.
+- **Power BI:** Final dashboard development pending.
 
-The project is being developed as a practical Data Analyst portfolio demonstrating data quality investigation, SQL querying, business analysis, and data visualization.
+The project is being developed as a practical Data Analyst portfolio demonstrating data quality investigation, data cleaning, SQL querying, Python analysis, business understanding, and data visualisation.
