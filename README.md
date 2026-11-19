@@ -4,7 +4,7 @@
 
 This portfolio project analyzes transactions from a UK-based online retailer to understand sales performance, customer purchasing behavior, product trends, and overall business performance.
 
-The project uses Microsoft Excel, SQL, and Python to investigate data quality, analyze transactions, identify purchasing patterns, and answer business questions using structured data analysis.
+This project uses Microsoft Excel, SQL, Python, and Power BI to investigate data quality, analyze transactions, identify purchasing patterns, and communicate business insights through data analysis and interactive reporting.
 
 ## Objectives
 
@@ -21,7 +21,7 @@ The project uses Microsoft Excel, SQL, and Python to investigate data quality, a
 - **Microsoft Excel** — Data quality investigation, PivotTables, charts, KPI cards, and dashboard development.
 - **SQL / MySQL** — Data quality checks, sales analysis, customer and product analysis, time-series analysis, and advanced business queries.
 - **Python** — Data cleaning, exploratory data analysis, sales analysis, customer analysis, and product analysis using Pandas, NumPy, Matplotlib, and Seaborn.
-- **Power BI** — Final interactive reporting and dashboard development (planned).
+- **Power BI** — Interactive report development, including sales performance, customer analysis, product analysis, and data visualisation.
 
 ## Project Structure
 
@@ -29,7 +29,7 @@ The project uses Microsoft Excel, SQL, and Python to investigate data quality, a
 - `Excel/` — Excel analysis, documentation, and dashboard deliverables.
 - `Sql/` — SQL scripts for data quality, sales, customer, product, time and seasonal, and advanced business analysis.
 - `Python/` — Python scripts for data understanding, cleaning, EDA, sales, customer, and product analysis.
-- `PowerBI/` — Power BI reports and dashboard deliverables.
+- `PowerBI/` — Power BI report files and related deliverables.
 
 ## Dataset
 
@@ -98,12 +98,24 @@ The Python phase uses Pandas and NumPy for data preparation and analysis, with M
 
 ### Selected Python Findings
 
-- **Total sales revenue:** 10,631,048.74 after excluding cancellation invoices and bad-debt adjustments.
+- **Total sales revenue:** £10,631,048.74 after excluding cancellation invoices and bad-debt adjustments.
 - **Monthly sales performance:** November 2011 recorded the highest monthly revenue in the observed period.
 - **Customer behaviour:** 2,845 out of 4,339 identified customers were repeat customers, representing a repeat purchase rate of approximately 65.57%.
 - **Customer revenue concentration:** The top 10 customers contributed approximately 17.31% of identified-customer revenue.
 - **Customer segmentation:** RFM analysis identified Champions, Loyal Customers, Big Spenders, At Risk, Hibernating, Potential Loyalists, and Others.
 - **Product performance:** Regency Cake Stand 3 Tier was among the highest-revenue physical products, while Paper Craft Little Birdie recorded unusually high quantity sales in a single invoice.
+
+## Power BI Analysis — Completed
+
+The Power BI phase focuses on interactive reporting and business performance monitoring using the cleaned Online Retail dataset.
+
+### Report Pages
+
+1. **Executive Sales Overview** — Revenue, orders, customers, quantity sold, average revenue per order, monthly revenue trends, and country performance.
+2. **Customer Analysis Overview** — Customer revenue, repeat purchasing, one-time customers, RFM segmentation, and monthly customer revenue trends.
+3. **Product Analysis** — Total products, product revenue, quantity sold, top products by revenue, quantity, and number of orders.
+
+The report includes KPI cards, interactive charts, and slicers to explore business performance.
 
 ## Data Handling and Limitations
 
@@ -123,6 +135,6 @@ The Python phase uses Pandas and NumPy for data preparation and analysis, with M
 - **Excel:** Completed.
 - **SQL:** Completed — six analysis scripts.
 - **Python:** Completed — six analysis scripts.
-- **Power BI:** Final dashboard development pending.
+- **Power BI:** Completed — three report pages covering executive sales overview, customer analysis, and product analysis.
 
-The project is being developed as a practical Data Analyst portfolio demonstrating data quality investigation, data cleaning, SQL querying, Python analysis, business understanding, and data visualisation.
+This completed project demonstrates practical Data Analyst skills in data quality investigation, data cleaning, SQL querying, Python analysis, business understanding, and data visualisation.
