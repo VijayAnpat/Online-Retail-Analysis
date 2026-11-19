@@ -94,8 +94,6 @@ RFM analysis segments customers using:
 - RFM segments were created using rule-based scoring and thresholds. These segments are analytical groupings, not universal customer classifications.
 - Hibernating and At Risk classifications indicate purchasing patterns in the available data; they do not prove that customers have permanently churned.
 
-
-
 ## 3. Product Analysis
 
 ### Key Metrics
@@ -103,8 +101,8 @@ RFM analysis segments customers using:
 | Metric | Result |
 |---|---:|
 | Product transaction records | 525,933 |
-| Unique products | 3,942 |
-| Eligible transaction revenue | 10,631,048.74 |
+| Unique products after StockCode standardization | 3,832 |
+| Eligible product revenue | 10,631,048.74 |
 
 ### Top Products by Revenue
 
@@ -113,12 +111,12 @@ RFM analysis segments customers using:
 | DOTCOM POSTAGE | 206,248.77 |
 | REGENCY CAKESTAND 3 TIER | 174,156.54 |
 | PAPER CRAFT LITTLE BIRDIE | 168,469.60 |
-| WHITE HANGING HEART T-LIGHT HOLDER | 104,284.24 |
+| WHITE HANGING HEART T-LIGHT HOLDER | 106,236.72 |
 | PARTY BUNTING | 99,445.23 |
 | JUMBO BAG RED RETROSPOT | 94,159.81 |
 | MEDIUM CERAMIC TOP STORAGE JAR | 81,700.92 |
 | POSTAGE | 78,101.88 |
-| Manual | 77,750.27 |
+| Manual | 77,752.82 |
 | RABBIT NIGHT LIGHT | 66,870.03 |
 
 ### Top Products by Quantity Sold
@@ -129,7 +127,7 @@ RFM analysis segments customers using:
 | MEDIUM CERAMIC TOP STORAGE JAR | 78,033 |
 | WORLD WAR 2 GLIDERS | 54,951 |
 | JUMBO BAG RED RETROSPOT | 48,375 |
-| WHITE HANGING HEART T-LIGHT HOLDER | 37,584 |
+| WHITE HANGING HEART T-LIGHT HOLDER | 37,876 |
 | POPCORN HOLDER | 36,749 |
 | PACK OF 72 RETROSPOT CAKE CASES | 36,396 |
 | ASSORTED COLOUR BIRD ORNAMENT | 36,362 |
@@ -142,7 +140,7 @@ The following products appeared in the highest number of unique invoices:
 
 | Product | Invoice Count |
 |---|---:|
-| WHITE HANGING HEART T-LIGHT HOLDER | 2,193 |
+| WHITE HANGING HEART T-LIGHT HOLDER | 2,260 |
 | JUMBO BAG RED RETROSPOT | 2,092 |
 | REGENCY CAKESTAND 3 TIER | 1,989 |
 | PARTY BUNTING | 1,686 |
@@ -160,7 +158,7 @@ The following products appeared in the highest number of unique invoices:
 | DOTCOM POSTAGE | 1.94% |
 | REGENCY CAKESTAND 3 TIER | 1.64% |
 | PAPER CRAFT LITTLE BIRDIE | 1.58% |
-| WHITE HANGING HEART T-LIGHT HOLDER | 0.98% |
+| WHITE HANGING HEART T-LIGHT HOLDER | 1.00% |
 | PARTY BUNTING | 0.94% |
 | JUMBO BAG RED RETROSPOT | 0.89% |
 | MEDIUM CERAMIC TOP STORAGE JAR | 0.77% |
@@ -181,6 +179,7 @@ The following products appeared in the highest number of unique invoices:
 
 - Cancelled invoices and bad debt adjustment records were excluded.
 - Product records with missing StockCode or Description were excluded.
+- StockCodes were converted to uppercase to standardize case variations. For example, `85123A` and `85123a` had the same product description and were combined for product analysis.
 - Only positive quantities were considered when ranking products by quantity sold.
 - Postage, DOTCOM POSTAGE, and Manual are transaction lines, not physical merchandise. They should be excluded when analyzing physical product performance.
 - High quantity from a single invoice, such as PAPER CRAFT LITTLE BIRDIE, should be investigated rather than treated as evidence of consistent customer demand.

@@ -231,3 +231,12 @@ print("Total customer revenue:",
 
 print("Total segmented revenue:",
       round(segment_summary["Total_Revenue"].sum(), 2))
+
+# Export RFM Customer Segmentation for Power BI
+
+rfm.to_csv(
+    "../Data/rfm_customer_segments.csv",
+    index=False
+)
+
+print("RFM customer segmentation exported successfully.")

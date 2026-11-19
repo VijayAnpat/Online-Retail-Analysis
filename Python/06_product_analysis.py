@@ -1,39 +1,56 @@
+
 # Online Retail Analysis
 # Script: Product Analysis
-# Purpose:
+# Purpose: Identify top-performing products by revenue,
+# quantity sold, purchase frequency, and revenue contribution.
 
 import pandas as pd
 from pathlib import Path
 
-# Load cleaned dataset
+
+# 1. Load Cleaned Dataset
+
 project_dir = Path(__file__).resolve().parent.parent
 file_path = project_dir / "Data" / "onlineretail_cleaned.csv"
 
 df = pd.read_csv(file_path)
 
-# Prepare columns
+
+# 2. Prepare Columns
+
 df["InvoiceNo"] = df["InvoiceNo"].astype(str)
 df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
 df["Revenue"] = df["Quantity"] * df["UnitPrice"]
 
-# Exclude cancelled invoices and bad debt adjustments
+
+# 3. Filter Sales Data
+
 sales_df = df[
     (~df["InvoiceNo"].str.startswith("C")) &
     (df["Description"] != "Adjust bad debt")
 ].copy()
 
-# Keep valid product records
+
+# 4. Prepare Product Data
+
 product_df = sales_df.dropna(
     subset=["StockCode", "Description"]
 ).copy()
 
-print("Product Analysis Data Preparation")
+# Standardize StockCode to avoid case-sensitive duplicates
+product_df["StockCode"] = product_df["StockCode"].str.upper()
+
+
+# 5. Product Data Overview
+
+print("\nProduct Analysis Data Preparation")
 print("----------------------------------")
 print("Total product records:", len(product_df))
 print("Unique products:", product_df["StockCode"].nunique())
 print("Total product revenue:", round(product_df["Revenue"].sum(), 2))
 
-# Analysis 1: Top 10 Products By Revenue
+
+# 6. Top 10 Products by Revenue
 
 top_products_revenue = (
     product_df.groupby(["StockCode", "Description"])
@@ -52,7 +69,7 @@ print("--------------------------")
 print(top_products_revenue.to_string(index=False))
 
 
-# Analysis 2: Top 10 Products by Quantity Sold
+# 7. Top 10 Products by Quantity Sold
 
 top_products_quantity = (
     product_df[product_df["Quantity"] > 0]
@@ -71,7 +88,8 @@ print("\nTop 10 Products by Quantity Sold")
 print("--------------------------------")
 print(top_products_quantity.to_string(index=False))
 
-# Analysis 3: Top 10 Products by Purchase Frequency
+
+# 8. Top 10 Products by Purchase Frequency
 
 top_products_frequency = (
     product_df.groupby(["StockCode", "Description"])
@@ -89,7 +107,8 @@ print("\nTop 10 Products by Purchase Frequency")
 print("--------------------------------------")
 print(top_products_frequency.to_string(index=False))
 
-# Analysis 4: Product Revenue Contribution
+
+# 9. Product Revenue Contribution
 
 product_revenue = (
     product_df.groupby(["StockCode", "Description"])["Revenue"]
@@ -119,7 +138,8 @@ print(
 
 print("\nTotal Product Revenue:", round(total_revenue, 2))
 
-# Final Validation
+
+# 10. Final Validation
 
 print("\nFinal Validation")
 print("----------------")
@@ -128,11 +148,11 @@ print("Unique products:", product_df["StockCode"].nunique())
 print("Revenue in product data:", round(product_df["Revenue"].sum(), 2))
 print("Revenue in grouped products:", round(product_revenue["Revenue"].sum(), 2))
 
-# Validation checks
 assert not product_df["InvoiceNo"].str.startswith("C").any()
 assert not product_df["Description"].eq("Adjust bad debt").any()
+
 assert round(product_df["Revenue"].sum(), 2) == round(
     product_revenue["Revenue"].sum(), 2
 )
 
-print("All validation checks passed.")
+print("\nAll validation checks passed.")
